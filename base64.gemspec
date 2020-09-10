@@ -1,8 +1,6 @@
-require_relative 'lib/base64/version'
-
 Gem::Specification.new do |spec|
   spec.name          = "base64"
-  spec.version       = Base64::VERSION
+  spec.version       = "0.1.0"
   spec.authors       = ["Yusuke Endoh"]
   spec.email         = ["mame@ruby-lang.org"]
 
