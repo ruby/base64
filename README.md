@@ -1,8 +1,8 @@
 # Base64
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/base64`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+The Base64 module provides for the encoding (`#encode64`, `#strict_encode64`,
+`#urlsafe_encode64`) and decoding (`#decode64`, `#strict_decode64`,
+`#urlsafe_decode64`) of binary data using a Base64 representation.
 
 ## Installation
 
@@ -22,7 +22,19 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+A simple encoding and decoding.
+
+```ruby
+require "base64"
+
+enc   = Base64.encode64('Send reinforcements')
+                    # -> "U2VuZCByZWluZm9yY2VtZW50cw==\n"
+plain = Base64.decode64(enc)
+                    # -> "Send reinforcements"
+```
+
+The purpose of using base64 to encode data is that it translates any
+binary data into purely printable characters.
 
 ## Development
 
@@ -32,5 +44,5 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/hsbt/base64.
+Bug reports and pull requests are welcome on GitHub at https://github.com/ruby/base64.
 
