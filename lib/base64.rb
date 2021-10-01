@@ -1,26 +1,39 @@
 # frozen_string_literal: true
 #
-# = base64.rb: methods for base64-encoding and -decoding strings
+# \Module \Base64 provides methods for:
 #
-
-# The Base64 module provides for the encoding (#encode64, #strict_encode64,
-# #urlsafe_encode64) and decoding (#decode64, #strict_decode64,
-# #urlsafe_decode64) of binary data using a Base64 representation.
+# - Encoding a binary string (containing non-ASCII characters)
+#   as a string of printable ASCII characters.
+# - Decoding such an encoded string.
 #
-# == Example
+# The encoded string consists only of characters from a 64-character set
+# that includes:
 #
-# A simple encoding and decoding.
+# - <tt>('A'..'Z')</tt>.
+# - <tt>('a'..'z')</tt>.
+# - <tt>('0'..'9')</tt>.
+# - Either:
+#   - <tt>%w[+ /]</tt>:
+#     {RFC 2045-compliant}[https://datatracker.ietf.org/doc/html/rfc2045];
+#     _not_ suitable for URLs.
+#   - <tt>%w[- _]</tt>:
+#     {RFC 4648-compliant}[https://datatracker.ietf.org/doc/html/rfc4648];
+#     suitable for URLs.
 #
-#     require "base64"
+# \Base64 is commonly used in contexts where binary data
+# is not allowed or supported:
 #
-#     enc   = Base64.encode64('Send reinforcements')
-#                         # -> "U2VuZCByZWluZm9yY2VtZW50cw==\n"
-#     plain = Base64.decode64(enc)
-#                         # -> "Send reinforcements"
+# - Images in HTML or CSS files, or in URLs.
+# - Email attachments.
 #
-# The purpose of using base64 to encode data is that it translates any
-# binary data into purely printable characters.
-
+# A \Base64-encoded string is about one-third larger that its source.
+# See the {Wikipedia article}[https://en.wikipedia.org/wiki/Base64]
+# for more information.
+#
+# Examples on this page assume that the including program has executed:
+#
+#   require 'base64'
+#
 module Base64
   module_function
 
