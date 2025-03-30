@@ -2,4 +2,8 @@ source "https://rubygems.org"
 
 gem "rake"
 gem "test-unit"
-gem "rbs"
+
+group :sig do
+  gem "rbs"
+  gem "rdoc", "<= 6.11"
+end
