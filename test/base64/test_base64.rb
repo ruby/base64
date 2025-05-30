@@ -112,4 +112,13 @@ class TestBase64 < Test::Unit::TestCase
     assert_equal("\0\0\0", Base64.urlsafe_decode64("AAAA"))
     assert_raise(ArgumentError) { Base64.urlsafe_decode64("AA=") }
   end
+
+  def test_aliases
+    assert_equal(Base64.method(:encode), Base64.method(:encode64))
+    assert_equal(Base64.method(:decode), Base64.method(:decode64))
+    assert_equal(Base64.method(:strict_encode), Base64.method(:strict_encode64))
+    assert_equal(Base64.method(:strict_decode), Base64.method(:strict_decode64))
+    assert_equal(Base64.method(:urlsafe_encode), Base64.method(:urlsafe_encode64))
+    assert_equal(Base64.method(:urlsafe_decode), Base64.method(:urlsafe_decode64))
+  end
 end
