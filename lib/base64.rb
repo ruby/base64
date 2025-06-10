@@ -224,7 +224,7 @@ module Base64
   end
 
   # :call-seq:
-  #   Base64.decode(encoded_string) -> decoded_string
+  #   Base64.decode64(encoded_string) -> decoded_string
   #
   # Returns a string containing the decoding of an RFC-2045-compliant
   # \Base64-encoded string +encoded_string+:

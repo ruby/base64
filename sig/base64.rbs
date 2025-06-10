@@ -183,7 +183,7 @@
 module Base64
   # <!--
   #   rdoc-file=lib/base64.rb
-  #   - Base64.decode(encoded_string) -> decoded_string
+  #   - Base64.decode64(encoded_string) -> decoded_string
   # -->
   # Returns a string containing the decoding of an RFC-2045-compliant
   # Base64-encoded string `encoded_string`:
