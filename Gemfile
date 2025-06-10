@@ -7,3 +7,4 @@ group :sig do
   gem "rbs"
   gem "rdoc", "<= 6.11"
 end
+gemspec
