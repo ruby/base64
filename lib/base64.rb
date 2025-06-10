@@ -150,9 +150,9 @@
 #
 # == Newlines
 #
-# An encoded string returned by Base64.encode64 or Base64.urlsafe_encode64
-# has an embedded newline character
-# after each 60-character sequence, and, if non-empty, at the end:
+# An encoded string returned by Base64.encode64 has an embedded
+# newline character after each 60-character sequence, and,
+# if non-empty, at the end:
 #
 #   # No newline if empty.
 #   encoded = Base64.encode64("\x00" *  0)
