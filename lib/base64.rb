@@ -183,6 +183,7 @@
 #
 module Base64
 
+  # The version of this module.
   VERSION = "0.3.0"
 
   module_function
