@@ -17,8 +17,8 @@ namespace :rbs do
     require "pathname"
 
     Dir.mktmpdir do |tmpdir|
-      system("rdoc --ri --output #{tmpdir}/doc --root=. lib")
-      system("rbs annotate --no-system --no-gems --no-site --no-home -d #{tmpdir}/doc sig")
+      sh("rdoc --ri --output #{tmpdir}/doc --root=. lib")
+      sh("rbs annotate --no-system --no-gems --no-site --no-home -d #{tmpdir}/doc sig")
     end
   end
 
