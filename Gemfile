@@ -5,5 +5,5 @@ gem "test-unit"
 
 group :sig do
   gem "rbs"
-  gem "rdoc", "<= 6.11"
+  gem "rdoc"
 end
