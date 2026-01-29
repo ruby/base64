@@ -277,13 +277,13 @@ module Base64
   # `/`; see [Encoding Character
   # Set](Base64.html#module-Base64-label-Encoding+Character+Sets) above:
   #
-  #     Base64.strict_encode64("\xFB\xEF\xBE") # => "++++\n"
-  #     Base64.strict_encode64("\xFF\xFF\xFF") # => "////\n"
+  #     Base64.strict_encode64("\xFB\xEF\xBE") # => "++++"
+  #     Base64.strict_encode64("\xFF\xFF\xFF") # => "////"
   #
   # The returned string may include padding; see
   # [Padding](Base64.html#module-Base64-label-Padding) above.
   #
-  #     Base64.strict_encode64('*') # => "Kg==\n"
+  #     Base64.strict_encode64('*') # => "Kg=="
   #
   # The returned string will have no newline characters, regardless of its length;
   # see [Newlines](Base64.html#module-Base64-label-Newlines) above:
