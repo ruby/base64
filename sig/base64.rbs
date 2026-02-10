@@ -30,15 +30,15 @@
 #
 # A Base64-encoded string consists only of characters from a 64-character set:
 #
-# *   `('A'..'Z')`.
-# *   `('a'..'z')`.
-# *   `('0'..'9')`.
-# *   `=`, the 'padding' character.
+# *   <code>('A'..'Z')</code>.
+# *   <code>('a'..'z')</code>.
+# *   <code>('0'..'9')</code>.
+# *   <code>=</code>, the 'padding' character.
 # *   Either:
-#     *   `%w[+ /]`:
+#     *   <code>%w[+ /]</code>:
 #         [RFC-2045-compliant](https://datatracker.ietf.org/doc/html/rfc2045);
 #         *not* safe for URLs.
-#     *   `%w[- _]`:
+#     *   <code>%w[- _]</code>:
 #         [RFC-4648-compliant](https://datatracker.ietf.org/doc/html/rfc4648);
 #         safe for URLs.
 #
@@ -61,9 +61,9 @@
 #
 # **Padding in Encode Methods**
 #
-# Padding -- extending an encoded string with zero, one, or two trailing `=`
-# characters -- is performed by methods Base64.encode64, Base64.strict_encode64,
-# and, by default, Base64.urlsafe_encode64:
+# Padding -- extending an encoded string with zero, one, or two trailing
+# <code>=</code> characters -- is performed by methods Base64.encode64,
+# Base64.strict_encode64, and, by default, Base64.urlsafe_encode64:
 #
 #     Base64.encode64('s')                         # => "cw==\n"
 #     Base64.strict_encode64('s')                  # => "cw=="
@@ -81,16 +81,16 @@
 #         # n = 2:  6 bytes => 8 characters.
 #         Base64.strict_encode64('123456')   # => "MDEyMzQ1"
 #
-# *   Input bytes of length *3n+1* generate padded output characters of length
-#     *4(n+1)*, with two padding characters at the end:
+# *   Input bytes of length <em>3n+1</em> generate padded output characters of
+#     length <em>4(n+1)</em>, with two padding characters at the end:
 #
 #         # n = 1:  4 bytes => 8 characters.
 #         Base64.strict_encode64('1234')     # => "MDEyMw=="
 #         # n = 2:  7 bytes => 12 characters.
 #         Base64.strict_encode64('1234567')  # => "MDEyMzQ1Ng=="
 #
-# *   Input bytes of length *3n+2* generate padded output characters of length
-#     *4(n+1)*, with one padding character at the end:
+# *   Input bytes of length <em>3n+2</em> generate padded output characters of
+#     length <em>4(n+1)</em>, with one padding character at the end:
 #
 #         # n = 1:  5 bytes => 8 characters.
 #         Base64.strict_encode64('12345')    # => "MDEyMzQ="
@@ -107,16 +107,16 @@
 #         # n = 2:  6 bytes => 8 characters.
 #         Base64.urlsafe_encode64('123456', padding: false)   # => "MDEyMzQ1"
 #
-# *   Input bytes of length *3n+1* generate unpadded output characters of length
-#     *4n+2*, with two padding characters at the end:
+# *   Input bytes of length <em>3n+1</em> generate unpadded output characters of
+#     length <em>4n+2</em>, with two padding characters at the end:
 #
 #         # n = 1:  4 bytes => 6 characters.
 #         Base64.urlsafe_encode64('1234', padding: false)     # => "MDEyMw"
 #         # n = 2:  7 bytes => 10 characters.
 #         Base64.urlsafe_encode64('1234567', padding: false)  # => "MDEyMzQ1Ng"
 #
-# *   Input bytes of length *3n+2* generate unpadded output characters of length
-#     *4n+3*, with one padding character at the end:
+# *   Input bytes of length <em>3n+2</em> generate unpadded output characters of
+#     length <em>4n+3</em>, with one padding character at the end:
 #
 #         # n = 1:  5 bytes => 7 characters.
 #         Base64.urlsafe_encode64('12345', padding: false)    # => "MDEyMzQ"
@@ -192,7 +192,7 @@ module Base64
   #
   # Non-Base64 characters in `encoded_string` are ignored; see [Encoding Character
   # Set](Base64.html#module-Base64-label-Encoding+Character+Sets) above: these
-  # include newline characters and characters `-` and `/`:
+  # include newline characters and characters <code>-</code> and <code>/</code>:
   #
   #     Base64.decode64("\x00\n-_") # => ""
   #
@@ -211,8 +211,8 @@ module Base64
   # Returns a string containing the RFC-2045-compliant Base64-encoding of
   # `string`.
   #
-  # Per RFC 2045, the returned string may contain the URL-unsafe characters `+` or
-  # `/`; see [Encoding Character
+  # Per RFC 2045, the returned string may contain the URL-unsafe characters
+  # <code>+</code> or <code>/</code>; see [Encoding Character
   # Set](Base64.html#module-Base64-label-Encoding+Character+Sets) above:
   #
   #     Base64.encode64("\xFB\xEF\xBE") # => "++++\n"
@@ -252,7 +252,8 @@ module Base64
   #
   # Non-Base64 characters in `encoded_string` are not allowed; see [Encoding
   # Character Set](Base64.html#module-Base64-label-Encoding+Character+Sets) above:
-  # these include newline characters and characters `-` and `/`:
+  # these include newline characters and characters <code>-</code> and
+  # <code>/</code>:
   #
   #     Base64.strict_decode64("\n") # Raises ArgumentError
   #     Base64.strict_decode64('-')  # Raises ArgumentError
@@ -273,8 +274,8 @@ module Base64
   # Returns a string containing the RFC-2045-compliant Base64-encoding of
   # `string`.
   #
-  # Per RFC 2045, the returned string may contain the URL-unsafe characters `+` or
-  # `/`; see [Encoding Character
+  # Per RFC 2045, the returned string may contain the URL-unsafe characters
+  # <code>+</code> or <code>/</code>; see [Encoding Character
   # Set](Base64.html#module-Base64-label-Encoding+Character+Sets) above:
   #
   #     Base64.strict_encode64("\xFB\xEF\xBE") # => "++++"
@@ -331,8 +332,8 @@ module Base64
   # Returns the RFC-4648-compliant Base64-encoding of `string`.
   #
   # Per RFC 4648, the returned string will not contain the URL-unsafe characters
-  # `+` or `/`, but instead may contain the URL-safe characters `-` and `_`; see
-  # [Encoding Character
+  # <code>+</code> or <code>/</code>, but instead may contain the URL-safe
+  # characters <code>-</code> and `_`; see [Encoding Character
   # Set](Base64.html#module-Base64-label-Encoding+Character+Sets) above:
   #
   #     Base64.urlsafe_encode64("\xFB\xEF\xBE") # => "----"
