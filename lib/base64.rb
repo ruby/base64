@@ -379,4 +379,13 @@ module Base64
     end
     strict_decode64(str)
   end
+
+  class << self
+    alias encode encode64
+    alias decode decode64
+    alias strict_encode strict_encode64
+    alias strict_decode strict_decode64
+    alias urlsafe_encode urlsafe_encode64
+    alias urlsafe_decode urlsafe_decode64
+  end
 end
