@@ -16,5 +16,5 @@ jobs:
         run: |
           bundle config set with 'sig'
           bundle install
-      - name: Run RBS test, annotate and confirm
-        run: bundle exec rake rbs:{test,annotate,confirm}
+      - name: Run RBS test and confirm
+        run: bundle exec rake rbs:{test,confirm}
