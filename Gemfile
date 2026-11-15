@@ -7,3 +7,4 @@ group :sig do
   gem "rbs"
   gem "rdoc"
 end
+gemspec
