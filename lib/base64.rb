@@ -12,7 +12,7 @@
 # - Images in HTML or CSS files, or in URLs.
 # - Email attachments.
 #
-# A \Base64-encoded string is about one-third larger that its source.
+# A \Base64-encoded string is about one-third larger than its source.
 # See the {Wikipedia article}[https://en.wikipedia.org/wiki/Base64]
 # for more information.
 #
@@ -29,7 +29,7 @@
 #
 # == \Encoding Character Sets
 #
-# A \Base64-encoded string consists only of characters from a 64-character set:
+# A \Base64-encoded string uses the following characters:
 #
 # - <tt>('A'..'Z')</tt>.
 # - <tt>('a'..'z')</tt>.
@@ -71,62 +71,62 @@
 #   Base64.urlsafe_encode64('s')                 # => "cw=="
 #   Base64.urlsafe_encode64('s', padding: false) # => "cw"
 #
-# When padding is performed, the encoded string is always of length <em>4n</em>,
+# Ignoring newlines, when padding is performed the encoded string is of length <em>4n</em>,
 # where +n+ is a non-negative integer:
 #
 # - Input bytes of length <em>3n</em> generate unpadded output characters
 #   of length <em>4n</em>:
 #
 #     # n = 1:  3 bytes => 4 characters.
-#     Base64.strict_encode64('123')      # => "MDEy"
+#     Base64.strict_encode64('123')      # => "MTIz"
 #     # n = 2:  6 bytes => 8 characters.
-#     Base64.strict_encode64('123456')   # => "MDEyMzQ1"
+#     Base64.strict_encode64('123456')   # => "MTIzNDU2"
 #
 # - Input bytes of length <em>3n+1</em> generate padded output characters
 #   of length <em>4(n+1)</em>, with two padding characters at the end:
 #
 #     # n = 1:  4 bytes => 8 characters.
-#     Base64.strict_encode64('1234')     # => "MDEyMw=="
+#     Base64.strict_encode64('1234')     # => "MTIzNA=="
 #     # n = 2:  7 bytes => 12 characters.
-#     Base64.strict_encode64('1234567')  # => "MDEyMzQ1Ng=="
+#     Base64.strict_encode64('1234567')  # => "MTIzNDU2Nw=="
 #
 # - Input bytes of length <em>3n+2</em> generate padded output characters
 #   of length <em>4(n+1)</em>, with one padding character at the end:
 #
 #     # n = 1:  5 bytes => 8 characters.
-#     Base64.strict_encode64('12345')    # => "MDEyMzQ="
+#     Base64.strict_encode64('12345')    # => "MTIzNDU="
 #     # n = 2:  8 bytes => 12 characters.
-#     Base64.strict_encode64('12345678') # => "MDEyMzQ1Njc="
+#     Base64.strict_encode64('12345678') # => "MTIzNDU2Nzg="
 #
-# When padding is suppressed, for a positive integer <em>n</em>:
+# When padding is suppressed, for a non-negative integer <em>n</em>:
 #
 # - Input bytes of length <em>3n</em> generate unpadded output characters
 #   of length <em>4n</em>:
 #
 #     # n = 1:  3 bytes => 4 characters.
-#     Base64.urlsafe_encode64('123', padding: false)      # => "MDEy"
+#     Base64.urlsafe_encode64('123', padding: false)      # => "MTIz"
 #     # n = 2:  6 bytes => 8 characters.
-#     Base64.urlsafe_encode64('123456', padding: false)   # => "MDEyMzQ1"
+#     Base64.urlsafe_encode64('123456', padding: false)   # => "MTIzNDU2"
 #
 # - Input bytes of length <em>3n+1</em> generate unpadded output characters
-#   of length <em>4n+2</em>, with two padding characters at the end:
+#   of length <em>4n+2</em>, with no padding characters:
 #
 #     # n = 1:  4 bytes => 6 characters.
-#     Base64.urlsafe_encode64('1234', padding: false)     # => "MDEyMw"
+#     Base64.urlsafe_encode64('1234', padding: false)     # => "MTIzNA"
 #     # n = 2:  7 bytes => 10 characters.
-#     Base64.urlsafe_encode64('1234567', padding: false)  # => "MDEyMzQ1Ng"
+#     Base64.urlsafe_encode64('1234567', padding: false)  # => "MTIzNDU2Nw"
 #
 # - Input bytes of length <em>3n+2</em> generate unpadded output characters
-#   of length <em>4n+3</em>, with one padding character at the end:
+#   of length <em>4n+3</em>, with no padding characters:
 #
 #     # n = 1:  5 bytes => 7 characters.
-#     Base64.urlsafe_encode64('12345', padding: false)    # => "MDEyMzQ"
-#     # m = 2:  8 bytes => 11 characters.
-#     Base64.urlsafe_encode64('12345678', padding: false) # => "MDEyMzQ1Njc"
+#     Base64.urlsafe_encode64('12345', padding: false)    # => "MTIzNDU"
+#     # n = 2:  8 bytes => 11 characters.
+#     Base64.urlsafe_encode64('12345678', padding: false) # => "MTIzNDU2Nzg"
 #
 # <b>Padding in Decode Methods</b>
 #
-# All of the \Base64 decode methods support (but do not require) padding.
+# All of the \Base64 decode methods support padded input; their acceptance of unpadded input differs.
 #
 # \Method Base64.decode64 does not check the size of the padding:
 #
@@ -160,17 +160,17 @@
 #
 #   # Newline at end of short output.
 #   encoded = Base64.encode64("\x00" *  1)
-#   encoded.size        # => 4
+#   encoded.size        # => 5
 #   encoded.index("\n") # => 4
 #
 #   # Newline at end of longer output.
 #   encoded = Base64.encode64("\x00" * 45)
-#   encoded.size        # => 60
+#   encoded.size        # => 61
 #   encoded.index("\n") # => 60
 #
 #   # Newlines embedded and at end of still longer output.
 #   encoded = Base64.encode64("\x00" * 46)
-#   encoded.size                          # => 65
+#   encoded.size                          # => 66
 #   encoded.rindex("\n")                  # => 65
 #   encoded.split("\n").map {|s| s.size } # => [60, 4]
 #
@@ -235,7 +235,7 @@ module Base64
   #
   # Non-\Base64 characters in +encoded_string+ are ignored;
   # see {Encoding Character Set}[Base64.html#module-Base64-label-Encoding+Character+Sets] above:
-  # these include newline characters and characters <tt>-</tt> and <tt>/</tt>:
+  # these include newline characters and characters <tt>-</tt> and <tt>_</tt>:
   #
   #   Base64.decode64("\x00\n-_") # => ""
   #
@@ -295,7 +295,7 @@ module Base64
   #
   # Non-\Base64 characters in +encoded_string+ are not allowed;
   # see {Encoding Character Set}[Base64.html#module-Base64-label-Encoding+Character+Sets] above:
-  # these include newline characters and characters <tt>-</tt> and <tt>/</tt>:
+  # these include newline characters and characters <tt>-</tt> and <tt>_</tt>:
   #
   #   Base64.strict_decode64("\n") # Raises ArgumentError
   #   Base64.strict_decode64('-')  # Raises ArgumentError
@@ -353,11 +353,13 @@ module Base64
   #
   # Returns the decoding of an RFC-4648-compliant \Base64-encoded string +encoded_string+:
   #
-  # +encoded_string+ may not contain non-Base64 characters;
-  # see {Encoding Character Set}[Base64.html#module-Base64-label-Encoding+Character+Sets] above:
+  # Both the URL-safe alphabet (<tt>-</tt> and <tt>_</tt>) and the standard
+  # alphabet (<tt>+</tt> and <tt>/</tt>) are accepted, including mixed input.
+  # Other non-Base64 characters, including newlines, are rejected:
   #
-  #   Base64.urlsafe_decode64('+')  # Raises ArgumentError.
-  #   Base64.urlsafe_decode64('/')  # Raises ArgumentError.
+  #   Base64.urlsafe_decode64('____') # => "\xFF\xFF\xFF"
+  #   Base64.urlsafe_decode64('////') # => "\xFF\xFF\xFF"
+  #   Base64.urlsafe_decode64('_/8=') # => "\xFF\xFF"
   #   Base64.urlsafe_decode64("\n") # Raises ArgumentError.
   #
   # Padding in +encoded_string+, if present, must be correct:
